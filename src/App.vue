@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+
+document.title = "JSM Config Creator"
 </script>
 
 <template>
