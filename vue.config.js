@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === "production" ? "/jsm-config-creator/" : "/",
+  publicPath: "/jsm-config-creator/"
 };
