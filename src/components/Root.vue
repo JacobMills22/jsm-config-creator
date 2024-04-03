@@ -21,13 +21,18 @@ import TextButton from "./common/TextButton.vue";
 
 <style scoped>
 .root {
-    background-color: var(--background-colour);
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+@media screen and (min-width: 1250px) {
+    .root {
+        width: 1250px;
+    }
 }
 
 .splash-page {

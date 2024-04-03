@@ -11,6 +11,10 @@ body {
   margin: 0px;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: var(--text-colour-light);
+  background-color: var(--background-colour);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 :root {
