@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { useRootStore } from "@/stores/rootStore.ts";
+import { useRootStore } from "@/stores/rootStore";
 
 const { showSplashScreen } = storeToRefs(useRootStore());
 
