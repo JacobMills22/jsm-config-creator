@@ -6,13 +6,20 @@ const { showSplashScreen } = storeToRefs(useRootStore());
 
 import TextButton from "./common/TextButton.vue";
 
+import { generateConfig } from "@/backend/configGenerator";
+
+const newButtonClicked  = () => {
+    showSplashScreen.value = false;
+    generateConfig();
+}
+
 </script>
 
 <template>
     <div class="root">
         <Transition>
             <div v-show="showSplashScreen" class="splash-page">
-                <TextButton class="splash-page-button" @click="showSplashScreen = false">New</TextButton>
+                <TextButton class="splash-page-button" @click="newButtonClicked">New</TextButton>
                 <TextButton class="splash-page-button">Load</TextButton>
             </div>
         </Transition>
