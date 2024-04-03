@@ -1,18 +1,19 @@
 <script setup lang="ts">
+import TextButton from "./common/TextButton.vue"
 </script>
 
 <template>
     <div class="root">
         <div class="splash-page">
-            <button>New</button>
-            <button>Load</button>
+            <TextButton class="splash-page-button">New</TextButton>
+            <TextButton class="splash-page-button">Load</TextButton>
         </div>
     </div>
 </template>
 
 <style scoped>
 .root {
-    background-color: #001f2b;
+    background-color: var(--background-colour);
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -30,16 +31,8 @@
     gap: 20px
 }
 
-button {
-    padding: 15px;
-    flex: 1;
-    background-color: transparent;
-    border-color: lightblue;
-    border-width: 2px;
-    border-style: solid;
-    border-radius: 20px;
-    color: white;
-    font-size: x-large;
+.splash-page-button {
+    flex: 1
 }
 
 </style>
