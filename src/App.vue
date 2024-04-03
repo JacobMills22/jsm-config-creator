@@ -16,6 +16,8 @@ body {
 :root {
   --background-colour: #001f2b;
   --border-colour: lightblue;
+  --active-colour: lightblue;
   --text-colour-light: white;
+  --text-colour-dark: black;
 }
 </style>

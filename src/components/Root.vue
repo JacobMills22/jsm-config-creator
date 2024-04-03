@@ -1,13 +1,21 @@
 <script setup lang="ts">
-import TextButton from "./common/TextButton.vue"
+import { storeToRefs } from "pinia";
+import { useRootStore } from "@/stores/rootStore.ts";
+
+const { showSplashScreen } = storeToRefs(useRootStore());
+
+import TextButton from "./common/TextButton.vue";
+
 </script>
 
 <template>
     <div class="root">
-        <div class="splash-page">
-            <TextButton class="splash-page-button">New</TextButton>
-            <TextButton class="splash-page-button">Load</TextButton>
-        </div>
+        <Transition>
+            <div v-show="showSplashScreen" class="splash-page">
+                <TextButton class="splash-page-button" @click="showSplashScreen = false">New</TextButton>
+                <TextButton class="splash-page-button">Load</TextButton>
+            </div>
+        </Transition>
     </div>
 </template>
 
@@ -28,11 +36,21 @@ import TextButton from "./common/TextButton.vue"
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px
+    gap: 20px;
 }
 
 .splash-page-button {
     flex: 1
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 
 </style>

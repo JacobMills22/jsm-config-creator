@@ -17,4 +17,9 @@ button {
     font-size: x-large;
 }
 
+button:hover {
+    background-color: var(--active-colour);
+    color: var(--text-colour-dark);
+}
+
 </style>
