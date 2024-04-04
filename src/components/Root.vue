@@ -1,58 +1,41 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import { useRootStore } from "@/stores/rootStore";
+import HomePage from "@/components/pages/HomePage.vue"
+import SplashPage from "@/components/pages/SplashPage.vue"
+
+import { useRootStore } from "@/stores/rootStore"
 
 const { showSplashScreen } = storeToRefs(useRootStore());
-
-import TextButton from "./common/TextButton.vue";
-
-import { generateConfig } from "@/backend/configGenerator";
-
-const newButtonClicked  = () => {
-    showSplashScreen.value = false;
-    generateConfig();
-}
 
 </script>
 
 <template>
     <div class="root">
         <Transition>
-            <div v-show="showSplashScreen" class="splash-page">
-                <TextButton class="splash-page-button" @click="newButtonClicked">New</TextButton>
-                <TextButton class="splash-page-button">Load</TextButton>
-            </div>
+            <SplashPage v-if="showSplashScreen"/>
+        </Transition>
+        <Transition>
+            <HomePage v-if="!showSplashScreen"/>
         </Transition>
     </div>
 </template>
 
 <style scoped>
 .root {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    background-color: var(--background-colour);
+    position: absolute;
 }
 
-@media screen and (min-width: 1250px) {
+@media screen and (min-width: 1500px) {
     .root {
-        width: 1250px;
+        width: 1500px;
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
     }
-}
-
-.splash-page {
-    align-self: stretch;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
-
-.splash-page-button {
-    flex: 1
 }
 
 .v-enter-active,

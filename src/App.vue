@@ -8,16 +8,16 @@ import Root from "./components/Root.vue";
 
 <style>
 body {
+  width: 100vw;
+  height: 100vh;
   margin: 0px;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: var(--text-colour-light);
-  background-color: var(--background-colour);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: var(--body-background-colour);
 }
 
 :root {
+  --body-background-colour: #001720;
   --background-colour: #001f2b;
   --border-colour: lightblue;
   --active-colour: lightblue;
