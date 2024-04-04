@@ -34,7 +34,6 @@ const { showSplashScreen } = storeToRefs(useRootStore());
     width: 100%;
     display: flex;
     flex-direction: row;
-    border-bottom: 1px #00415a solid;
 }
 
 .header-button {

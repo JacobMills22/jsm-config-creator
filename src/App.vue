@@ -17,11 +17,12 @@ body {
 }
 
 :root {
-  --body-background-colour: #001720;
-  --background-colour: #001f2b;
-  --border-colour: lightblue;
-  --active-colour: lightblue;
-  --text-colour-light: white;
-  --text-colour-dark: black;
+  --body-background-colour: #0c1821;
+  --body-border-colour: #1B2A41;
+  --background-colour: #0c1821;
+  --border-colour: #CCC9DC;
+  --active-colour: #CCC9DC;
+  --text-colour-light: #CCC9DC;
+  --text-colour-dark: #0c1821;
 }
 </style>

@@ -28,13 +28,15 @@ const { showSplashScreen } = storeToRefs(useRootStore());
     position: absolute;
 }
 
-@media screen and (min-width: 1500px) {
+@media screen and (min-width: 1252px) {
     .root {
-        width: 1500px;
+        width: 1250px;
         height: 100%;
         position: absolute;
         left: 50%;
         transform: translate(-50%);
+        border-left: 1px var(--body-border-colour) solid;
+        border-right: 1px var(--body-border-colour) solid;
     }
 }
 
