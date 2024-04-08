@@ -4,15 +4,15 @@
 import { storeToRefs } from "pinia";
 import { useRootStore } from "@/stores/rootStore"
 
-import TextButton from "@/components/common/TextButton.vue";
+import GenericButton from "@/components/common/GenericButton.vue";
 
 const { showSplashScreen } = storeToRefs(useRootStore());
 </script>
 
 <template>
     <div class="splash-page">
-        <TextButton class="splash-page-button" @click="showSplashScreen = false">New</TextButton>
-        <TextButton class="splash-page-button">Load</TextButton>
+        <GenericButton class="splash-page-button" @click="showSplashScreen = false">New</GenericButton>
+        <GenericButton class="splash-page-button">Load</GenericButton>
     </div>
 </template>
 

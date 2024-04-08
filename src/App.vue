@@ -19,10 +19,14 @@ body {
 :root {
   --body-background-colour: #0c1821;
   --body-border-colour: #1B2A41;
-  --background-colour: #0c1821;
+  --background-colour: var(--body-background-colour);
   --border-colour: #CCC9DC;
   --active-colour: #CCC9DC;
   --text-colour-light: #CCC9DC;
-  --text-colour-dark: #0c1821;
+  --text-colour-dark: var(--body-background-colour);
+}
+
+p, h1 {
+    margin: 0px;
 }
 </style>

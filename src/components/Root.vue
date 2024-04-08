@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-import HomePage from "@/components/pages/HomePage.vue"
+import Homepage from "@/components/pages/Homepage/Homepage.vue"
 import SplashPage from "@/components/pages/SplashPage.vue"
 
 import { useRootStore } from "@/stores/rootStore"
@@ -15,7 +15,7 @@ const { showSplashScreen } = storeToRefs(useRootStore());
             <SplashPage v-if="showSplashScreen"/>
         </Transition>
         <Transition>
-            <HomePage v-if="!showSplashScreen"/>
+            <Homepage v-if="!showSplashScreen"/>
         </Transition>
     </div>
 </template>
