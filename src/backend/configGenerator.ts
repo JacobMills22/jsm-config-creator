@@ -1,13 +1,13 @@
-import {GamePadBind, gamepadBindToJsmString, jsmStringToGamepadBind } from "./GamePadBind";
+import {GamepadBind, gamepadBindToJsmString, jsmStringToGamepadBind } from "./GamepadBind";
 import {MkbBind, mkbBindToJsmString, jsmStringToMkbBind } from "./MkbBind";
 
 interface Binding {
-    gamePadBind: GamePadBind,
+    gamePadBind: GamepadBind,
     mkbBind: MkbBind
 }
 
 let bindings: Array<Binding> = [
-    { gamePadBind: GamePadBind.Up, mkbBind: MkbBind.A }
+    { gamePadBind: GamepadBind.Up, mkbBind: MkbBind.A }
 ] 
 
 export const generateConfig = () => {

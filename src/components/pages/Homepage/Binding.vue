@@ -1,20 +1,52 @@
-
-
 <script setup lang="ts">
-    import GenericButton from "@/components/common/GenericButton.vue";
+import { storeToRefs } from 'pinia'
+import { useMkbModalStore } from '@/stores/mkbModalStore'
+import { useBindingsStore } from '@/stores/bindingsStore'
+
+import { computed, type PropType } from 'vue'
+import GenericButton from '@/components/common/GenericButton.vue'
+
+import { GamepadBind } from '@/backend/GamepadBind'
+import { mkbBindToJsmString } from '@/backend/MkbBind'
+import { MkbBind } from '@/backend/MkbBind'
+
+const mkbModalStore = useMkbModalStore()
+
+const { bindings } = storeToRefs(useBindingsStore())
+
+const props = defineProps({
+    gamepadBind: {
+        type: Number as PropType<GamepadBind>,
+        required: true
+    },
+    gamepadBindString: String
+})
+
+const binding = computed(() => {
+    const index = bindings.value.findIndex((binding) => binding.gamepadBind === props.gamepadBind)
+
+    if (index >= 0)
+        return mkbBindToJsmString.get(bindings.value.at(index)?.mkbBind ?? MkbBind.NoInput)
+    else return mkbBindToJsmString.get(MkbBind.NoInput)
+})
+
+const mkbBindingClicked = () => {
+    mkbModalStore.openModal(props.gamepadBind)
+}
 </script>
 
 <template>
     <div class="binding-row">
-        <div class="gamepad-binding">N</div>
+        <div class="gamepad-binding">{{ gamepadBindString }}</div>
         <div class="comment">This is a comment</div>
-        <GenericButton class="kbm-binding">W Key</GenericButton>
+        <GenericButton class="kbm-binding" @click="mkbBindingClicked()">{{
+            binding
+        }}</GenericButton>
         <GenericButton class="binding-options"></GenericButton>
     </div>
 </template>
 
 <style scoped>
-
 .binding-row {
     display: flex;
     flex-direction: row;

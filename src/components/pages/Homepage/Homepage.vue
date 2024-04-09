@@ -1,31 +1,32 @@
-
-
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { useRootStore } from "@/stores/rootStore"
-import Header from "@/components/pages/Homepage/Header.vue"
-import Binding from "@/components/pages/Homepage/Binding.vue"
+import { storeToRefs } from 'pinia'
+import { useMkbModalStore } from '@/stores/mkbModalStore'
+import Header from '@/components/pages/Homepage/Header.vue'
+import Binding from '@/components/pages/Homepage/Binding.vue'
+import MkbBindingModal from '@/components/pages/Homepage/MkbBindingModal.vue'
 
-const { showSplashScreen } = storeToRefs(useRootStore());
+import { GamepadBind } from '@/backend/GamepadBind'
 
+const { showMkbModal } = storeToRefs(useMkbModalStore())
 </script>
 
 <template>
     <div class="home-page">
-        <div style="padding: 15px;">
-            <Header class="header"/>
+        <div style="padding: 15px">
+            <Header class="header" />
             <h2>Button Pad</h2>
             <div class="binding-container">
-                <Binding/>
-                <Binding/>
-                <Binding/>
-                <Binding/>
+                <Binding :gamepad-bind="GamepadBind.North" gamepad-bind-string="N" />
+                <Binding :gamepad-bind="GamepadBind.East" gamepad-bind-string="E" />
+                <Binding :gamepad-bind="GamepadBind.South" gamepad-bind-string="S" />
+                <Binding :gamepad-bind="GamepadBind.West" gamepad-bind-string="W" />
             </div>
             <h2>D-Pad</h2>
             <h2>Bumpers</h2>
             <h2>Triggers</h2>
             <h2>Menus</h2>
         </div>
+        <MkbBindingModal v-if="showMkbModal" />
     </div>
 </template>
 
@@ -97,3 +98,4 @@ const { showSplashScreen } = storeToRefs(useRootStore());
     font-weight: bold;
 }
 </style>
+@/stores/mkbModalStore
