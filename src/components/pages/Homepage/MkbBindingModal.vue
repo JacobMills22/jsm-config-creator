@@ -2,16 +2,22 @@
 import { storeToRefs } from 'pinia'
 import { useMkbModalStore } from '@/stores/mkbModalStore'
 import { useBindingsStore } from '@/stores/bindingsStore'
+import type { BindingInfo } from '@/stores/bindingsStore'
 
 import GenericButton from '@/components/common/GenericButton.vue'
 import { MkbBind } from '@/backend/MkbBind'
 
 const mkbModalStore = useMkbModalStore()
+const bindingsStore = useBindingsStore()
 
-const { selectedGamepadBinding } = storeToRefs(useMkbModalStore())
+const { selectedGamepadBinding } = storeToRefs(mkbModalStore)
+const { bindings } = storeToRefs(bindingsStore)
 
 const selectMkbBinding = (mkbBind: MkbBind) => {
-    useBindingsStore().addBinding({ gamepadBind: selectedGamepadBinding.value, mkbBind: mkbBind })
+    let binding: BindingInfo | undefined = bindings.value.get(selectedGamepadBinding.value)
+    if (binding == undefined) return
+
+    binding.mkbBind = mkbBind
     mkbModalStore.closeModal()
 }
 </script>

@@ -1,21 +1,20 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import type { Ref } from 'vue'
 
 import { GamepadBind } from '@/backend/GamepadBind'
 import { MkbBind } from '@/backend/MkbBind'
-import Binding from '@/components/pages/Homepage/Binding.vue'
 
-export interface Binding {
-    gamepadBind: GamepadBind
+export interface BindingInfo {
     mkbBind: MkbBind
+    comment: String
 }
 
 export const useBindingsStore = defineStore('bindingsStore', () => {
-    const bindings = ref(new Map<GamepadBind, MkbBind>()) as Ref<Map<GamepadBind, MkbBind>>
+    const bindings: Ref<Map<GamepadBind, BindingInfo>> = ref(new Map<GamepadBind, BindingInfo>())
 
-    const addBinding = (binding: Binding) => {
-        bindings.value.set(binding.gamepadBind, binding.mkbBind)
+    const addBinding = (gamepadBind: GamepadBind, bindingInfo: BindingInfo) => {
+        bindings.value.set(gamepadBind, bindingInfo)
     }
 
     return { bindings, addBinding }

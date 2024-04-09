@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
 import { useMkbModalStore } from '@/stores/mkbModalStore'
 import { useBindingsStore } from '@/stores/bindingsStore'
 
-import { computed, type PropType } from 'vue'
+import { computed, reactive, type PropType } from 'vue'
 import GenericButton from '@/components/common/GenericButton.vue'
 
 import { GamepadBind } from '@/backend/GamepadBind'
@@ -11,8 +10,7 @@ import { mkbBindToJsmString } from '@/backend/MkbBind'
 import { MkbBind } from '@/backend/MkbBind'
 
 const mkbModalStore = useMkbModalStore()
-
-const { bindings } = storeToRefs(useBindingsStore())
+const bindingsStore = useBindingsStore()
 
 const props = defineProps({
     gamepadBind: {
@@ -22,12 +20,11 @@ const props = defineProps({
     gamepadBindString: String
 })
 
+const bindingInfo = reactive({ mkbBind: MkbBind.NoInput, comment: 'No Comment' })
+bindingsStore.addBinding(props.gamepadBind, bindingInfo)
+
 const kbmBindingString = computed(() => {
-    const kbmBinding = bindings.value.get(props.gamepadBind)
-
-    if (kbmBinding === undefined) return mkbBindToJsmString.get(MkbBind.NoInput)
-
-    return mkbBindToJsmString.get(kbmBinding)
+    return mkbBindToJsmString.get(bindingInfo.mkbBind)
 })
 
 const mkbBindingClicked = () => {
@@ -38,7 +35,7 @@ const mkbBindingClicked = () => {
 <template>
     <div class="binding-row">
         <div class="gamepad-binding">{{ gamepadBindString }}</div>
-        <div class="comment">This is a comment</div>
+        <input class="comment" v-model="bindingInfo.comment" />
         <GenericButton class="kbm-binding" @click="mkbBindingClicked()">{{
             kbmBindingString
         }}</GenericButton>
