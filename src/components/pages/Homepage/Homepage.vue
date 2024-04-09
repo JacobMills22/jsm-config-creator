@@ -1,13 +1,21 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useMkbModalStore } from '@/stores/mkbModalStore'
+import { GamepadBind } from '@/backend/GamepadBind'
+import { generateConfig } from '@/backend/configGenerator'
+import { useBindingsStore } from '@/stores/bindingsStore'
+import { ref } from 'vue'
+import type { Ref } from 'vue'
+
 import Header from '@/components/pages/Homepage/Header.vue'
 import Binding from '@/components/pages/Homepage/Binding.vue'
 import MkbBindingModal from '@/components/pages/Homepage/MkbBindingModal.vue'
-
-import { GamepadBind } from '@/backend/GamepadBind'
+import GenericButton from '@/components/common/GenericButton.vue'
 
 const { showMkbModal } = storeToRefs(useMkbModalStore())
+const { bindings } = storeToRefs(useBindingsStore())
+
+const config = ref([]) as Ref<Array<string>>
 </script>
 
 <template>
@@ -26,6 +34,9 @@ const { showMkbModal } = storeToRefs(useMkbModalStore())
             <h2>Triggers</h2>
             <h2>Menus</h2>
         </div>
+        <GenericButton @click="config = generateConfig(bindings)">Generate</GenericButton>
+
+        <textarea style="height: 400px">{{ config.join('\n') }}</textarea>
         <MkbBindingModal v-if="showMkbModal" />
     </div>
 </template>
