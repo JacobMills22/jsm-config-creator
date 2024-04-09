@@ -22,12 +22,12 @@ const props = defineProps({
     gamepadBindString: String
 })
 
-const binding = computed(() => {
-    const index = bindings.value.findIndex((binding) => binding.gamepadBind === props.gamepadBind)
+const kbmBindingString = computed(() => {
+    const kbmBinding = bindings.value.get(props.gamepadBind)
 
-    if (index >= 0)
-        return mkbBindToJsmString.get(bindings.value.at(index)?.mkbBind ?? MkbBind.NoInput)
-    else return mkbBindToJsmString.get(MkbBind.NoInput)
+    if (kbmBinding === undefined) return mkbBindToJsmString.get(MkbBind.NoInput)
+
+    return mkbBindToJsmString.get(kbmBinding)
 })
 
 const mkbBindingClicked = () => {
@@ -40,7 +40,7 @@ const mkbBindingClicked = () => {
         <div class="gamepad-binding">{{ gamepadBindString }}</div>
         <div class="comment">This is a comment</div>
         <GenericButton class="kbm-binding" @click="mkbBindingClicked()">{{
-            binding
+            kbmBindingString
         }}</GenericButton>
         <GenericButton class="binding-options"></GenericButton>
     </div>

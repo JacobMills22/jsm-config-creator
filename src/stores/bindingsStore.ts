@@ -12,15 +12,10 @@ export interface Binding {
 }
 
 export const useBindingsStore = defineStore('bindingsStore', () => {
-    const bindings = ref([]) as Ref<Array<Binding>>
+    const bindings = ref(new Map<GamepadBind, MkbBind>()) as Ref<Map<GamepadBind, MkbBind>>
 
-    const addBinding = (newBinding: Binding) => {
-        const index = bindings.value.findIndex(
-            (binding) => binding.gamepadBind === newBinding.gamepadBind
-        )
-
-        if (index !== -1) bindings.value.splice(index, 1, newBinding)
-        else bindings.value.push(newBinding)
+    const addBinding = (binding: Binding) => {
+        bindings.value.set(binding.gamepadBind, binding.mkbBind)
     }
 
     return { bindings, addBinding }
